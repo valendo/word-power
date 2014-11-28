@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Word Power</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- PowerWord references -->
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+<body ng-app="word" ng-controller="WordCtrl">
+    <ion-side-menus>
+
+        <!-- Center content -->
+        <ion-side-menu-content>
+            <ion-header-bar class="bar-dark">
+                <button class="button button-icon" ng-click="toggleCategories()">
+                    <i class="icon ion-navicon"></i>
+                </button>
+                <h1 class="title">{{activeCategory.category}}</h1>
+            </ion-header-bar>
+
+            <ion-tabs class="tabs-striped tabs-background-positive tabs-light tabs-icon-only has-tabs-top tabs-top">
+                <ion-tab title="Words" icon-on="ion-ios7-paper" icon-off="ion-ios7-paper-outline">
+                    <ion-content>
+                        <ion-list>
+                            <ion-item ng-repeat="word in activeCategory.words" class="item-text-wrap">
+                                <b>{{word.word}}</b>
+                                <div style="font-style:italic;font-size:smaller;margin-bottom:5px;">({{word.meaning}})</div>
+
+                                <div ng-repeat="sample in word.samples">
+                                    <div>- {{sample}}</div>
+                                </div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>-->
+                </ion-tab>
+                <ion-tab title="Youtube" icon-on="ion-social-youtube" icon-off="ion-social-youtube-outline">
+                    <ion-content>
+                        <div class="video-container">
+                            <iframe ng-attr-src="{{getVideo()}}" frameborder="0" width="560" height="315"></iframe>
+                        </div>
+                    </ion-content>
+                </ion-tab>
+            </ion-tabs>
+        </ion-side-menu-content>
+
+        <!-- Left menu -->
+        <ion-side-menu side="left">
+            <ion-header-bar class="bar-dark">
+                <h1 class="title">Word Power</h1>
+            </ion-header-bar>
+            <ion-content scroll="false">
+                <ion-list>
+                    <ion-item ng-repeat="category in categories" ng-click="selectCategory(category, $index)" ng-class="{active: activeCategory == category}">
+                        {{category.category}}
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="scripts/app.js"></script>
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+</body>
+</html>
